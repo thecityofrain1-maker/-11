@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Куда потратить деньги?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(145deg, #1a2a3a 0%, #0f1a24 100%);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 3.5rem;
+      padding: 3.5rem 3rem;
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .lang-toggle {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #b0c7db;
+      padding: 0.5rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border-color: rgba(255, 215, 100, 0.5);
+      transform: scale(1.02);
+    }
+
+    .lang-btn.active {
+      background: #f5c542;
+      border-color: #f5c542;
+      color: #1a2a3a;
+      box-shadow: 0 0 20px rgba(245, 197, 66, 0.3);
+    }
+
+    .lang-btn.active:hover {
+      background: #ffe074;
+      border-color: #ffe074;
+    }
+
+    .main-question {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2rem;
+      letter-spacing: -0.5px;
+      word-break: break-word;
+    }
+
+    .main-question span {
+      background: linear-gradient(135deg, #f5c542, #ffb347);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 10px rgba(245, 197, 66, 0.25);
+    }
+
+    .arrow-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.8rem;
+      animation: float-arrow 2.2s ease-in-out infinite;
+    }
+
+    @keyframes float-arrow {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(12px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .arrow-svg {
+      width: 70px;
+      height: 70px;
+      filter: drop-shadow(0 8px 16px rgba(245, 197, 66, 0.35));
+    }
+
+    .arrow-svg path {
+      stroke: #f5c542;
+      stroke-width: 2.5;
+    }
+
+    .donate-btn {
+      display: inline-block;
+      background: linear-gradient(145deg, #f5c542, #e6a82b);
+      color: #1a1f2b;
+      font-weight: 700;
+      font-size: 1.8rem;
+      padding: 1.2rem 3.8rem;
+      border-radius: 80px;
+      text-decoration: none;
+      letter-spacing: 1px;
+      box-shadow: 0 18px 30px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(245, 197, 66, 0.3);
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
+      border: none;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      position: relative;
+      transform: scale(1);
+    }
+
+    .donate-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(145deg, #ffd95e, #f0b830);
+      box-shadow: 0 25px 40px -6px rgba(245, 197, 66, 0.5), 0 0 0 1px #f5c542;
+      color: #0d1219;
+    }
+
+    .donate-btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 8px 16px -4px rgba(0,0,0,0.5);
+    }
+
+    .btn-sub {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-top: 0.5rem;
+      letter-spacing: 2px;
+      color: #d4e2f0;
+    }
+
+    .footer-note {
+      margin-top: 2.8rem;
+      color: rgba(255, 255, 255, 0.25);
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding-top: 2rem;
+    }
+
+    /* адаптив */
+    @media (max-width: 600px) {
+      .card {
+        padding: 2.2rem 1.5rem;
+        border-radius: 2.5rem;
+      }
+      .main-question {
+        font-size: 2.2rem;
+      }
+      .donate-btn {
+        font-size: 1.4rem;
+        padding: 1rem 2.4rem;
+      }
+      .arrow-svg {
+        width: 55px;
+        height: 55px;
+      }
+      .lang-toggle {
+        justify-content: center;
+        margin-bottom: 1.8rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .main-question {
+        font-size: 1.8rem;
+      }
+      .donate-btn {
+        font-size: 1.2rem;
+        padding: 0.9rem 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Переключатель языков -->
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langRu" data-lang="ru">🇷🇺 Русский</button>
+      <button class="lang-btn" id="langEn" data-lang="en">🇬🇧 English</button>
+    </div>
+
+    <!-- Главный вопрос (динамический) -->
+    <h1 class="main-question" id="questionText">
+      Не знаешь куда <span>потратить</span> деньги?
+    </h1>
+
+    <!-- Стрелка -->
+    <div class="arrow-wrapper">
+      <svg class="arrow-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 25 L50 40 L30 55" stroke="#f5c542" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 40 L62 40" stroke="#f5c542" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 6"/>
+        <circle cx="40" cy="40" r="34" stroke="#f5c542" stroke-width="1.5" stroke-opacity="0.25"/>
+        <circle cx="40" cy="40" r="26" stroke="#f5c542" stroke-width="1" stroke-opacity="0.15"/>
+      </svg>
+    </div>
+
+    <!-- Кнопка-ссылка -->
+    <a href="https://www.donationalerts.com/r/wdbb" target="_blank" class="donate-btn" id="donateBtn">
+      <span id="btnText">Помочь</span>
+      <span class="btn-sub" id="btnSub">donationalerts.com/r/wdbb</span>
+    </a>
+
+    <div class="footer-note" id="footerNote">✦ нажми, если готов ✦</div>
+  </div>
+
+  <script>
+    (function() {
+      // DOM элементы
+      const questionEl = document.getElementById('questionText');
+      const btnText = document.getElementById('btnText');
+      const btnSub = document.getElementById('btnSub');
+      const footerNote = document.getElementById('footerNote');
+      const langRu = document.getElementById('langRu');
+      const langEn = document.getElementById('langEn');
+
+      // Тексты для двух языков
+      const translations = {
+        ru: {
+          question: 'Не знаешь куда <span>потратить</span> деньги?',
+          btn: 'Помочь',
+          sub: 'donationalerts.com/r/wdbb',
+          footer: '✦ нажми, если готов ✦'
+        },
+        en: {
+          question: 'Don\'t know where to <span>spend</span> your money?',
+          btn: 'Help',
+          sub: 'donationalerts.com/r/wdbb',
+          footer: '✦ click if you\'re ready ✦'
+        }
+      };
+
+      // Текущий язык (по умолчанию русский)
+      let currentLang = 'ru';
+
+      // Функция обновления текстов
+      function setLanguage(lang) {
+        const t = translations[lang];
+        if (!t) return;
+
+        // Вставляем HTML для вопроса (с span)
+        questionEl.innerHTML = t.question;
+        btnText.textContent = t.btn;
+        btnSub.textContent = t.sub;
+        footerNote.textContent = t.footer;
+
+        // Обновляем активный класс у кнопок
+        if (lang === 'ru') {
+          langRu.classList.add('active');
+          langEn.classList.remove('active');
+        } else {
+          langEn.classList.add('active');
+          langRu.classList.remove('active');
+        }
+
+        currentLang = lang;
+      }
+
+      // Обработчики кнопок
+      langRu.addEventListener('click', function() {
+        if (currentLang === 'ru') return;
+        setLanguage('ru');
+      });
+
+      langEn.addEventListener('click', function() {
+        if (currentLang === 'en') return;
+        setLanguage('en');
+      });
+
+      // Дополнительно: сохраняем выбранный язык в localStorage (опционально)
+      // При загрузке — русский по умолчанию, но можно проверить сохранённый
+      // (для удобства оставляем как есть)
+      // Можно также проверить предпочтения браузера, но для простоты оставим ru
+
+      // Инициализация (убедимся, что активна ru)
+      setLanguage('ru');
+    })();
+  </script>
+</body>
+</html>
